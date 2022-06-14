@@ -87,8 +87,8 @@ const isEngineer =
 
   ]
 
-
-async function init() {
+let engineer= false
+async function firstQuestion() {
     return inquirer
       .prompt(managerQuestions)
       .then((answers) => {
@@ -98,5 +98,60 @@ async function init() {
       .catch((error) => {
         console.log(error)
       })
+    }
+
+    async function secondQuestion() {
+        return inquirer
+          .prompt(isEngineer)
+          .then((answer) => {
+              console.log(answer)
+             if (answer.position ==='engineer'){
+                  engineer= true
+             }
+           return engineer
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+        } 
+
+        async function thirdQuestion() {
+          
+           
+    
+        if (engineer) {
+            return inquirer
+            .prompt(engineerQuestions)
+            .then((answers) => {
+                console.log(answers)
+                return answers
+             
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+        }
+        else {
+            return inquirer
+            .prompt(internQuestions)
+            .then((answers) => {
+                console.log(answers)
+                return answers
+             
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+        }
+           
+            } 
+    
+                
+
+  const init=()=>{
+      firstQuestion()
+    //   secondQuestion()
+    //  thirdQuestion()
   }
+  
   init()
