@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/nadybee/Team-Profile-Generator#readme",
   "dependencies": {
-    "bootstrap": "^3.4.1",
     "inquirer": "^8.2.4",
     "jest": "^28.1.1"
   }

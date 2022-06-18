@@ -1,157 +1,121 @@
-
+console.log('connected')
+const employees = []
 const inquirer = require("inquirer")
 
-const  managerQuestions = [
+
+const employeeQuestions = [
     {
         type: "input",
         name: "name",
-        message: "What is your team manager's name?",
+        message: "Please enter the name",
       },
       {
         type: "input",
         name: "ID",
-        message: "What is your team manager's Employee ID?",
+        message: "Please enter the Employee ID?",
       },
 
       {
         type: "input",
         name: "email",
-        message: "What is your team manager's email address?",
-      },
-      {
-        type: "input",
-        name: "phone",
-        message: "What is your team manager's office number?",
- 
+        message: "Please enter the email address?",
       }
+  
    
 ]
-const isEngineer = 
-{
-    type: "list",
-    name: "position",
-    message: "Please add a team member",
-    choices: ["engineer", "intern"]
 
-  }
+const managerQuestions = [
+    ...employeeQuestions, 
 
-  const engineerQuestions = [
     {
         type: "input",
-        name: "name",
-        message: "What is your engineer's name?",
+        name: "phone",
+        message: "Please enter the phone number?",
       },
       {
-        type: "input",
-        name: "ID",
-        message: "What is your engineer's Employee ID?",
-      },
+          type: "list",
+          name: "next",
+          message: "who would you like to add next?",
+          choices: ["engineer", "intern","none"]
+      }
 
-      {
-        type: "input",
-        name: "email",
-        message: "What is your engineer's email address?",
-      },
+    ]
+  const engineerQuestions = [
+      ...employeeQuestions,
+
       {
         type: "input",
         name: "github",
-        message: "What is your engineer's GitHub username?",
+        message: "What is their GitHub username?",
  
-      }
-
+      },
+      {
+        type: "list",
+        name: "next",
+        message: "who would you like to add next?",
+        choices: ["engineer", "intern","none"]
+    }
   ]
+
 
   const internQuestions = [
-    {
-        type: "input",
-        name: "name",
-        message: "What is your intern's name?",
-      },
-      {
-        type: "input",
-        name: "ID",
-        message: "What is your intern's Employee ID?",
-      },
+      ...employeeQuestions,
 
       {
         type: "input",
-        name: "email",
-        message: "What is your intern's email address?",
+        name: "school",
+        message: "What is their school?",
+ 
       },
       {
-        type: "input",
-        name: "github",
-        message: "What is your engineer's school?",
- 
-      }
+        type: "list",
+        name: "next",
+        message: "who would you like to add next?",
+        choices: ["engineer", "intern","none"]
+    }
 
   ]
 
-let engineer= false
-async function firstQuestion() {
+
+async function askUser() {
     return inquirer
       .prompt(managerQuestions)
       .then((answers) => {
-          console.log(answers)
+          answers.position = 'manager'
+          if (answers.next ==="none"){
+            employees.push(answers)
+            console.log(employees)
+        }
+        else if (answers.next ==="engineer"){
+         return inquirer
+         .prompt (engineerQuestions)
+         .then ((answers)=> {
+             answers.position = 'engineer'
+             employees.push(answers)
+            console.log(employees)})
+     }
+     else if (answers.next === "intern"){
+        return inquirer
+        .prompt (internQuestions)
+        .then ((answers)=> {
+            answers.position = "intern"
+            employees.push(answers)
+           console.log(employees)})
+     }
        
       })
+
       .catch((error) => {
         console.log(error)
       })
+      
     }
 
-    async function secondQuestion() {
-        return inquirer
-          .prompt(isEngineer)
-          .then((answer) => {
-              console.log(answer)
-             if (answer.position ==='engineer'){
-                  engineer= true
-             }
-           return engineer
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-        } 
-
-        async function thirdQuestion() {
-          
-           
     
-        if (engineer) {
-            return inquirer
-            .prompt(engineerQuestions)
-            .then((answers) => {
-                console.log(answers)
-                return answers
-             
-            })
-            .catch((error) => {
-              console.log(error)
-            })
-        }
-        else {
-            return inquirer
-            .prompt(internQuestions)
-            .then((answers) => {
-                console.log(answers)
-                return answers
-             
-            })
-            .catch((error) => {
-              console.log(error)
-            })
-        }
-           
-            } 
-    
-                
+const init=()=>{
+    askUser()
+   
+}
 
-  const init=()=>{
-      firstQuestion()
-    //   secondQuestion()
-    //  thirdQuestion()
-  }
-  
-  init()
+init()
+
