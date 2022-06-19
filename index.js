@@ -1,121 +1,163 @@
-console.log('connected')
+console.log("connected")
 const employees = []
 const inquirer = require("inquirer")
 
-
 const employeeQuestions = [
-    {
-        type: "input",
-        name: "name",
-        message: "Please enter the name",
-      },
-      {
-        type: "input",
-        name: "ID",
-        message: "Please enter the Employee ID?",
-      },
+  {
+    type: "input",
+    name: "name",
+    message: "Please enter the name",
+  },
+  {
+    type: "input",
+    name: "ID",
+    message: "Please enter the Employee ID?",
+  },
 
-      {
-        type: "input",
-        name: "email",
-        message: "Please enter the email address?",
-      }
-  
-   
+  {
+    type: "input",
+    name: "email",
+    message: "Please enter the email address?",
+  },
 ]
 
 const managerQuestions = [
-    ...employeeQuestions, 
+  ...employeeQuestions,
 
-    {
-        type: "input",
-        name: "phone",
-        message: "Please enter the phone number?",
-      },
-      {
-          type: "list",
-          name: "next",
-          message: "who would you like to add next?",
-          choices: ["engineer", "intern","none"]
-      }
+  {
+    type: "input",
+    name: "phone",
+    message: "Please enter the phone number?",
+  },
+  {
+    type: "list",
+    name: "next",
+    message: "who would you like to add next?",
+    choices: ["engineer", "intern", "none"],
+  },
+]
+const engineerQuestions = [
+  ...employeeQuestions,
 
-    ]
-  const engineerQuestions = [
-      ...employeeQuestions,
+  {
+    type: "input",
+    name: "github",
+    message: "What is their GitHub username?",
+  },
+  {
+    type: "list",
+    name: "next",
+    message: "who would you like to add next?",
+    choices: ["engineer", "intern", "none"],
+  },
+]
 
-      {
-        type: "input",
-        name: "github",
-        message: "What is their GitHub username?",
- 
-      },
-      {
-        type: "list",
-        name: "next",
-        message: "who would you like to add next?",
-        choices: ["engineer", "intern","none"]
-    }
-  ]
+const internQuestions = [
+  ...employeeQuestions,
 
-
-  const internQuestions = [
-      ...employeeQuestions,
-
-      {
-        type: "input",
-        name: "school",
-        message: "What is their school?",
- 
-      },
-      {
-        type: "list",
-        name: "next",
-        message: "who would you like to add next?",
-        choices: ["engineer", "intern","none"]
-    }
-
-  ]
-
+  {
+    type: "input",
+    name: "school",
+    message: "What is their school?",
+  },
+  {
+    type: "list",
+    name: "next",
+    message: "who would you like to add next?",
+    choices: ["engineer", "intern", "none"],
+  },
+]
 
 async function askUser() {
-    return inquirer
-      .prompt(managerQuestions)
-      .then((answers) => {
-          answers.position = 'manager'
-          if (answers.next ==="none"){
-            employees.push(answers)
-            console.log(employees)
-        }
-        else if (answers.next ==="engineer"){
-         return inquirer
-         .prompt (engineerQuestions)
-         .then ((answers)=> {
-             answers.position = 'engineer'
-             employees.push(answers)
-            console.log(employees)})
-     }
-     else if (answers.next === "intern"){
-        return inquirer
-        .prompt (internQuestions)
-        .then ((answers)=> {
-            answers.position = "intern"
-            employees.push(answers)
-           console.log(employees)})
-     }
-       
-      })
+  inquirer
+    .prompt(managerQuestions)
+    .then((answers) => {
+      answers.position = "manager"
+      employees.push(answers)
+      console.log(` this is the position ` + answers.position)
+      console.log(employees)
+      askTypeofUser(answers)
 
-      .catch((error) => {
-        console.log(error)
-      })
-      
+    })
+
+    .catch((error) => {
+      console.log(error)
+    })
+}
+function askTypeofUser(type){
+    if (type.next==="engineer" ){
+
+engineeringQuestions()
+
+
+    }
+    else if(type.next ==="intern"){
+        internsQuestions()
+
+    }
+    else if(type.next=="none"){
+     return;
     }
 
-    
-const init=()=>{
-    askUser()
-   
+}
+
+function engineeringQuestions(){
+   return inquirer.prompt(engineerQuestions).then((answers) => {
+        answers.position = "engineer"
+        employees.push(answers)
+        console.log(employees)
+        askTypeofUser(answers)
+   })
+}
+
+function internsQuestions(){
+    return inquirer.prompt(internQuestions).then((answers) => {
+        answers.position = "intern"
+        employees.push(answers)
+        console.log(employees)
+        askTypeofUser(answers)
+
+
+
+      })
+}
+// async function askUser() {
+
+//     return inquirer
+//       .prompt(managerQuestions)
+//       .then((answers) => {
+//           answers.position = 'manager'
+//           if (answers.next ==="none"){
+//             employees.push(answers)
+//             console.log(employees)
+//         }
+//         else if (answers.next ==="engineer"){
+//          return inquirer
+//          .prompt (engineerQuestions)
+//          .then ((answers)=> {
+//              answers.position = 'engineer'
+//              employees.push(answers)
+//             console.log(employees)})
+//      }
+//      else if (answers.next === "intern"){
+//         return inquirer
+//         .prompt (internQuestions)
+//         .then ((answers)=> {
+//             answers.position = "intern"
+//             employees.push(answers)
+//            console.log(employees)})
+//      }
+
+//       })
+
+//       .catch((error) => {
+//         console.log(error)
+//       })
+
+//     }
+
+const init = () => {
+  askUser()
 }
 
 init()
-
