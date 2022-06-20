@@ -1,9 +1,23 @@
-const Employee = require('lib/Employee.js')
+const Employee = require("../lib/Employee")
 
-// name
-// test if there is a string
-// this.name = the stirng that is passed in
+describe("employee ", () => {
+  it("should return employee info", () => {
+    const answers = {
+      name: "Jason Fairbourne",
+      id: "1",
+      email: "jason@yoodlize.com",
+      role: "manager",
+    }
+    const jason = new Employee(
+      answers.name,
+      answers.id,
+      answers.email,
+      answers.role
+    )
 
-//id
-//email
-//role
+    expect(jason.name).toEqual("Jason Fairbourne")
+    expect(jason.id).toEqual("1")
+    expect(jason.email).toEqual("jason@yoodlize.com")
+    expect(jason.role).toEqual("manager")
+  })
+})
