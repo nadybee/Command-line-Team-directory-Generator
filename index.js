@@ -2,8 +2,10 @@
 const employees = []
 const HTML = []
 const inquirer = require("inquirer")
+const Manager = require ('./lib/Manager')
 const Employee = require('./lib/Employee')
 const Engineer = require('./lib/Engineer')
+const Intern = require('./lib/Intern')
 
 const employeeQuestions = [
   {
@@ -80,8 +82,11 @@ async function askUser() {
       // console.log(` this is the position ` + answers.role)
       console.log(employees)
       askTypeofUser(answers)
-      const firstEmployee = new Employee(employees[0].name, employees[0].id, employees[0].email, employees[0].role)
-      console.log(firstEmployee.summary())
+      let theManager = new Manager(answers.name, answers.id,answers.email, answers.phone)
+      HTML.push(theManager.managerCard())
+      // console.log(HTML.join(''))
+      // const firstEmployee = new Employee(employees[0].name, employees[0].id, employees[0].email, employees[0].role)
+      // console.log(firstEmployee.summary())
 
     })
     
@@ -101,8 +106,10 @@ engineersQuestions()
     else if(type.next ==="intern"){
         internsQuestions()
 
+
     }
     else if(type.next=="none"){
+      console.log(HTML.join(''))
      return;
     }
 
@@ -111,15 +118,11 @@ engineersQuestions()
 function engineersQuestions(){
    return inquirer.prompt(engineerQuestions).then((answers) => {
         answers.role = "engineer"
-        employees.push(answers)
-     
+        const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
+        HTML.push(newEngineer.engineerCard())
         askTypeofUser(answers)
-        const firstEmployee = new Engineer(employees[1].name, employees[1].id, employees[1].email, employees[1].role, employees[1].github)
-        console.log(firstEmployee.engineerCard())
-      
-           HTML.push(new Engineer(answers.name, answers.id, answers.email, answers.role, answers.email))
            
-         console.log(HTML)
+        //  console.log(HTML)
   
         
    })
@@ -128,8 +131,11 @@ function engineersQuestions(){
 function internsQuestions(){
     return inquirer.prompt(internQuestions).then((answers) => {
         answers.role = "intern"
-        employees.push(answers)
-        console.log(employees)
+        const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school)
+        HTML.push(newIntern.internCard())
+        // console.log(HTML.join(''))
+        // employees.push(answers)
+        // console.log(employees)
         askTypeofUser(answers)
 
 
