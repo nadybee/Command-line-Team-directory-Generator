@@ -6,7 +6,7 @@ describe("employee ", () => {
       name: "Jason Fairbourne",
       id: "1",
       email: "jason@yoodlize.com",
-      role: "manager",
+     
     }
     const jason = new Employee(
       answers.name,
@@ -18,6 +18,6 @@ describe("employee ", () => {
     expect(jason.name).toEqual("Jason Fairbourne")
     expect(jason.id).toEqual("1")
     expect(jason.email).toEqual("jason@yoodlize.com")
-    expect(jason.role).toEqual("manager")
+    expect(jason.role).toEqual("employee")
   })
 })
