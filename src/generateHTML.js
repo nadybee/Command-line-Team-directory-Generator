@@ -61,7 +61,7 @@ const createCards = (employees) => {
   for(let e=0; e<employees.length; e++) { 
     let managerSpecial = `<p>  tel: <a href="tele:${employees[e].phone}" class="p-1" target="_blank"> ${employees[e].phone} </a> </p>`
     let engineerSpecial = `<p> GitHub: <a href="https://github.com/${employees[e].github}" class= "p-1" target="_blank"> ${employees[e].github} </a> </p>`
-    let internSpecial = `<pclass="p-1"> ${employees[e].school} </p>`
+    let internSpecial = `<p class="p-1"> school: ${employees[e].school} </p>`
 
     if (employees[e].role === "manager") {
       special = managerSpecial
