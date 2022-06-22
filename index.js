@@ -8,7 +8,7 @@ const Manager = require ('./lib/Manager')
 const Employee = require('./lib/Employee')
 const Engineer = require('./lib/Engineer')
 const Intern = require('./lib/Intern')
-
+const generateHTML = require('./src/generateHTML')
 const employeeQuestions = [
   {
     type: "input",
@@ -81,7 +81,8 @@ async function askUser() {
     .then((answers) => {
       answers.role = "manager"
       let theManager = new Manager(answers.name, answers.id,answers.email, answers.phone)
-      HTML.push(theManager.managerCard())
+      employees.push(theManager)
+      // HTML.push(theManager.managerCard())
       askTypeofUser(answers)
    
       
@@ -104,9 +105,9 @@ engineersQuestions()
 
     }
     else if(type.next=="none"){
-      const finalHTML = createHTML()
+      // const finalHTML = createHTML()
       // console.log(HTML.join(''))
-    
+    const finalHTML = generateHTML(employees)
   
      writeToFile('index.html', finalHTML)
      return;
@@ -118,7 +119,8 @@ function engineersQuestions(){
    return inquirer.prompt(engineerQuestions).then((answers) => {
         answers.role = "engineer"
         const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
-        HTML.push(newEngineer.engineerCard())
+        employees.push(newEngineer)
+        // HTML.push(newEngineer.engineerCard())
         askTypeofUser(answers)
            
         //  console.log(HTML)
@@ -131,7 +133,8 @@ function internsQuestions(){
     return inquirer.prompt(internQuestions).then((answers) => {
         answers.role = "intern"
         const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school)
-        HTML.push(newIntern.internCard())
+        employees.push(newIntern)
+        // HTML.push(newIntern.internCard())
         askTypeofUser(answers)
 
 
