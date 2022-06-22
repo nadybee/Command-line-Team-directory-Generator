@@ -7,7 +7,7 @@ describe("manager ", () => {
       id: "1",
       email: "jason@yoodlize.com",
       role: "manager",
-      phone: "801-597-7084",
+      phone: "8015977084",
     }
     const jason = new Manager(
       answers.name,

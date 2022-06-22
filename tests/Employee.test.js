@@ -3,7 +3,7 @@ const Employee = require("../lib/Employee")
 describe("employee ", () => {
   it("should return employee info", () => {
     const answers = {
-      name: "Jason Fairbourne",
+      name: "jason fairbourne",
       id: "1",
       email: "jason@yoodlize.com",
      

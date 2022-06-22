@@ -56,7 +56,7 @@ const createHTML = (employees) => {
 
 const createCards = (employees) => {
     let cardHTML=[]
-  let special
+    let special
 
   for(let e=0; e<employees.length; e++) { 
     let managerSpecial = `<p>  tel: <a href="tele:${employees[e].phone}" class="p-1" target="_blank"> ${employees[e].phone} </a> </p>`
