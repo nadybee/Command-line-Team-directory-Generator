@@ -11,10 +11,11 @@
   - [License](#License)
 
   ## Description
-  this app allows the user to input team member info from the command line to generate a team directory HTML page. Input validation is used to insure user is inputing valid information.
+  This app allows the user to input team member info from the command line to generate a team directory HTML page. Input validation is used to insure user is inputing valid information.
 
   ## Usage
-  First download the dependancies using `npm install` then you can run the program using `npm start`. Once you have input all of your team members, an HTML file called `index.html` will be available in the output folder.
+  First download the dependancies using `npm install` then you can run the program using `npm start`. Once you have input all of your team members, an HTML file called `index.html` will be available in the output folder. A sample HTML file `index.html` is available for view in the root folder.
+  - a walkthrough video on how to use the program can be found [here](https://drive.google.com/file/d/13NkcyyswkQnpycuNKz7UCJeSnNJL05MX/view).
 
   ## Installation
   run `npm install` from the command line.
